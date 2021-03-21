@@ -1,0 +1,19 @@
+<h1>#ti bara bark</h1>
+<label>imaaage</label>
+<input
+  type="file"
+  (change)="imgUpload($event)"
+  #image
+  alt="Submit"
+  width="48"
+  height="48"
+/>
+<label>name</label>
+<input #name type="text" />
+<label>password</label>
+<input #pass type="password" />
+
+<textarea #about cols="30" rows="10"></textarea>
+<button (click)="takedata(name.value , pass.value , this.imageUrl)">
+  my cv
+</button>
