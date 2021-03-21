@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
     var formData = new FormData();
     formData.append("img", img.target.files[0]);
     this.http
-      .post("https://halim-resume.herokuapp.com//upload", formData)
+      .post("https://halim-resume.herokuapp.com/upload", formData)
       .subscribe((resp) => {
         this.imageUrl = resp["msg"].url;
       });
@@ -29,7 +29,7 @@ export class FormComponent implements OnInit {
       imageUrl: a,
     };
     this.http
-      .post("https://halim-resume.herokuapp.com//api/admin", obj, {
+      .post("https://halim-resume.herokuapp.com/api/admin", obj, {
         responseType: "text",
       })
       .subscribe((data) => {

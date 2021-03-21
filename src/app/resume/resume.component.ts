@@ -12,7 +12,7 @@ export class ResumeComponent implements OnInit {
   resume: any = localStorage.getItem("resume");
   ngOnInit(): void {
     this.http
-      .get(`https://halim-resume.herokuapp.com//api/admin/${this.resume}`, {
+      .get(`https://halim-resume.herokuapp.com/api/admin/${this.resume}`, {
         responseType: "json",
       })
       .subscribe((data) => {
