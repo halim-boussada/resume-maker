@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 // Serve only the static files form the dist directory
 app.use(express.static("./dist/resume-maker"));
 
-app.get("/*", (req, res) =>
+app.get("/", (req, res) =>
   res.sendFile("index.html", { root: "dist/angular-app-heroku/" })
 );
 app.post("/upload", upload.any(0), (req, res) => {
@@ -62,7 +62,7 @@ app.post("/api/admin", (req, res) => {
 });
 app.get("/api/admin/:pw", function (req, res) {
   try {
-    Admin.findOne({ password: req.params.pw }, function (error, result) {
+    Admin.find({}, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
     });
