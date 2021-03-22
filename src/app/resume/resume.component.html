@@ -24,9 +24,23 @@
       font-family: "Roboto", sans-serif;
     }
   </style>
+
   <body class="w3-light-grey">
+    <button
+      mat-raised-button
+      color="primary"
+      value="Generate PDF"
+      (click)="captureScreen()"
+    >
+      Generate PDF
+    </button>
+
     <!-- Page Container -->
-    <div class="w3-content w3-margin-top" style="max-width: 1400px;">
+    <div
+      class="w3-content w3-margin-top"
+      id="contentToConvert"
+      style="max-width: 1400px;"
+    >
       <!-- The Grid -->
       <div class="w3-row-padding">
         <!-- Left Column -->
