@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 // Serve only the static files form the dist directory
 app.use(express.static("./dist/resume-maker"));
 
-app.get("/", (req, res) =>
-  res.sendFile("index.html", { root: "dist/angular-app-heroku/" })
+app.get("/*", (req, res) =>
+  res.sendFile("index.html", { root: "dist/resume-maker" })
 );
 app.post("/upload", upload.any(0), (req, res) => {
   let image = req.files[0].path;
