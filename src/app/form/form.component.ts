@@ -29,13 +29,14 @@ export class FormComponent implements OnInit {
       imageUrl: a,
     };
     localStorage.setItem("cv", JSON.stringify(obj));
+    this.router.navigateByUrl("/resume");
     // this.http
     //   .post("https://halim-resume.herokuapp.com/api/admin", obj, {
     //     responseType: "text",
     //   })
     //   .subscribe((data) => {
     //     localStorage.setItem("resume", p);
-    //     this.router.navigateByUrl("/resume");
+    //
     //   });
     console.log(obj);
   }
