@@ -11,13 +11,14 @@ export class ResumeComponent implements OnInit {
   data: any;
   resume: any = localStorage.getItem("resume");
   ngOnInit(): void {
-    this.http
-      .get(`https://halim-resume.herokuapp.com/api/admin/${this.resume}`, {
-        responseType: "json",
-      })
-      .subscribe((data) => {
-        console.log("dadadadada", data);
-        this.data = data;
-      });
+    // this.http
+    //   .get(`https://halim-resume.herokuapp.com/api/admin/${this.resume}`, {
+    //     responseType: "json",
+    //   })
+    //   .subscribe((data) => {
+    //     console.log("dadadadada", data);
+    //     this.data = data;
+    //   });
+    this.data = JSON.parse(localStorage.getItem("cv"));
   }
 }
