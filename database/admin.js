@@ -7,6 +7,10 @@ const AdminSchema = new mongoose.Schema(
     name: String,
     password: String,
     imageUrl: String,
+    email: String,
+    about: String,
+    contact: String,
+    linkedin: String,
     type: { type: String, default: "user" },
   },
   {
