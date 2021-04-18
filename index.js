@@ -56,7 +56,6 @@ app.post("/api/admin", (req, res) => {
     var obj = {
       name: req.body.name,
       password: req.body.password,
-      imageUrl: req.body.imageUrl,
     };
     const newM = new Admin(obj);
     newM.save((err, result) => {

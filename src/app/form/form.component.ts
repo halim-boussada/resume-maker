@@ -22,22 +22,41 @@ export class FormComponent implements OnInit {
   //       this.imageUrl = resp["msg"].url;
   //     });
   // }
-  takedata(n, p, a) {
-    var obj = {
-      name: n,
-      password: p,
-      imageUrl: a,
-    };
-    localStorage.setItem("cv", JSON.stringify(obj));
-    this.router.navigateByUrl("/resume");
-    // this.http
-    //   .post("https://halim-resume.herokuapp.com/api/admin", obj, {
-    //     responseType: "text",
-    //   })
-    //   .subscribe((data) => {
-    //     localStorage.setItem("resume", p);
-    //
-    //   });
+  signUp(n, p, rp) {
+    if (p === rp) {
+      var obj = {
+        name: n,
+        password: p,
+      };
+      this.http
+        .post("http://localhost:3000/api/admin", obj, {
+          responseType: "text",
+        })
+        .subscribe((data) => {
+          alert("welcom");
+        });
+    } else {
+      alert("wrong password");
+    }
+
+    // localStorage.setItem("cv", JSON.stringify(obj));
+    // this.router.navigateByUrl("/resume");
+
     console.log(obj);
+  }
+  signIn(password) {
+    this.http
+      .post(`http://localhost:3000/api/user/${password}`, {
+        responseType: "text",
+      })
+      .subscribe((data) => {
+        if (data) {
+          var d = data["_id"];
+          localStorage.setItem("id", d);
+          this.router.navigateByUrl("/resume");
+        } else {
+          alert("wrong password ");
+        }
+      });
   }
 }
