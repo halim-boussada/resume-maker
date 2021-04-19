@@ -55,7 +55,7 @@ export class FormComponent implements OnInit {
           localStorage.setItem("id", d);
           this.router.navigateByUrl("/resume");
         } else {
-          alert("wrong password ");
+          alert("wrong passwor");
         }
       });
   }

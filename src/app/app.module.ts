@@ -6,9 +6,10 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { FormsModule } from "@angular/forms";
 import { ResumeComponent } from './resume/resume.component';
+import { CoachesListComponent } from './coaches-list/coaches-list.component';
 
 @NgModule({
-  declarations: [AppComponent, ResumeComponent],
+  declarations: [AppComponent, ResumeComponent, CoachesListComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
 
   providers: [],

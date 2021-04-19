@@ -33,7 +33,6 @@ export class ResumeComponent implements OnInit {
       })
       .subscribe((data) => {
         this.tech = data;
-        console.log(data);
       });
   }
 
