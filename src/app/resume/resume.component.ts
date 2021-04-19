@@ -9,19 +9,81 @@ import html2canvas from "html2canvas";
 })
 export class ResumeComponent implements OnInit {
   constructor(private http: HttpClient) {}
-  data: any;
-  resume: any = localStorage.getItem("resume");
+  user: any;
+  soft: any;
+  tech: any;
+  experience: any;
+  education: any;
+  addsoft: any = false;
+  addtech: any = false;
+  addexperience: any = false;
+  addeducation: any = false;
+  id: any = localStorage.getItem("id");
   ngOnInit(): void {
-    // this.http
-    //   .get(`https://halim-resume.herokuapp.com/api/admin/${this.resume}`, {
-    //     responseType: "json",
-    //   })
-    //   .subscribe((data) => {
-    //     console.log("dadadadada", data);
-    //     this.data = data;
-    //   });
-    this.data = JSON.parse(localStorage.getItem("cv"));
+    this.http
+      .post(`http://localhost:3000/api/soft/${this.id}`, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.soft = data;
+      });
+    this.http
+      .post(`http://localhost:3000/api/tech/${this.id}`, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.tech = data;
+        console.log(data);
+      });
   }
+
+  /////////// SOFT SKILLS //////////////////
+  addSoft() {
+    this.addsoft = true;
+  }
+  cancelSoft() {
+    this.addsoft = false;
+  }
+  saveSoft(skill) {
+    var obj = {
+      userId: this.id,
+      skill: skill,
+    };
+    console.log(obj);
+    this.http
+      .post(`http://localhost:3000/api/soft`, obj, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.ngOnInit();
+        this.cancelSoft();
+      });
+  }
+  ////////////// END SOFT //////////
+
+  /////////// SOFT tech //////////////////
+  addTech() {
+    this.addtech = true;
+  }
+  canceltech() {
+    this.addtech = false;
+  }
+  savetech(skill) {
+    var obj = {
+      userId: this.id,
+      skill: skill,
+    };
+    console.log(obj);
+    this.http
+      .post(`http://localhost:3000/api/tech`, obj, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.ngOnInit();
+        this.canceltech();
+      });
+  }
+  ////////////// END tech //////////
   captureScreen() {
     const data = document.getElementById("contentToConvert");
     html2canvas(data).then((canvas) => {

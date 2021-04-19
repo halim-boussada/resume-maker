@@ -123,7 +123,7 @@ app.post("/api/soft", (req, res) => {
     };
     const newM = new Soft(obj);
     newM.save((err, result) => {
-      res.send("dzadazda");
+      res.send({ data: "ok" });
     });
   } catch {
     res.send({ status: false, msg: err });
@@ -137,7 +137,7 @@ app.post("/api/tech", (req, res) => {
     };
     const newM = new Tech(obj);
     newM.save((err, result) => {
-      res.send("dzadazda");
+      res.send({ data: "ok" });
     });
   } catch {
     res.send({ status: false, msg: err });
@@ -186,7 +186,7 @@ app.post("/api/experience/:userId", function (req, res) {
 
 app.post("/api/education/:userId", function (req, res) {
   try {
-    Education.findOne({ userId: req.params.userId }, function (error, result) {
+    Education.find({ userId: req.params.userId }, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
     });
@@ -197,7 +197,7 @@ app.post("/api/education/:userId", function (req, res) {
 
 app.post("/api/soft/:userId", function (req, res) {
   try {
-    Soft.findOne({ userId: req.params.userId }, function (error, result) {
+    Soft.find({ userId: req.params.userId }, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
     });
@@ -207,7 +207,7 @@ app.post("/api/soft/:userId", function (req, res) {
 });
 app.post("/api/tech/:userId", function (req, res) {
   try {
-    Tech.findOne({ userId: req.params.userId }, function (error, result) {
+    Tech.find({ userId: req.params.userId }, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
     });
@@ -218,7 +218,7 @@ app.post("/api/tech/:userId", function (req, res) {
 
 app.post("/api/req/:coachId", function (req, res) {
   try {
-    Coaches.findOne({ coachId: req.params.coachId }, function (error, result) {
+    Coaches.find({ coachId: req.params.coachId }, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
     });
