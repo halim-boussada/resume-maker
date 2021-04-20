@@ -21,14 +21,14 @@ export class ResumeComponent implements OnInit {
   id: any = localStorage.getItem("id");
   ngOnInit(): void {
     this.http
-      .post(`http://localhost:3000/api/soft/${this.id}`, {
+      .post(`/api/soft/${this.id}`, {
         responseType: "json",
       })
       .subscribe((data) => {
         this.soft = data;
       });
     this.http
-      .post(`http://localhost:3000/api/tech/${this.id}`, {
+      .post(`/api/tech/${this.id}`, {
         responseType: "json",
       })
       .subscribe((data) => {
@@ -50,7 +50,7 @@ export class ResumeComponent implements OnInit {
     };
     console.log(obj);
     this.http
-      .post(`http://localhost:3000/api/soft`, obj, {
+      .post(`/api/soft`, obj, {
         responseType: "json",
       })
       .subscribe((data) => {
@@ -74,7 +74,7 @@ export class ResumeComponent implements OnInit {
     };
     console.log(obj);
     this.http
-      .post(`http://localhost:3000/api/tech`, obj, {
+      .post(`/api/tech`, obj, {
         responseType: "json",
       })
       .subscribe((data) => {

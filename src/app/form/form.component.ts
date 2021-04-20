@@ -12,16 +12,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {}
   imageUrl: string;
-  // imgUpload(img) {
-  //   console.log("IMG FROM VER==> ", img.target.files[0]);
-  //   var formData = new FormData();
-  //   formData.append("img", img.target.files[0]);
-  //   this.http
-  //     .post("https://halim-resume.herokuapp.com/upload", formData)
-  //     .subscribe((resp) => {
-  //       this.imageUrl = resp["msg"].url;
-  //     });
-  // }
+
   signUp(n, p, rp) {
     if (p === rp) {
       var obj = {
@@ -39,14 +30,11 @@ export class FormComponent implements OnInit {
       alert("wrong password");
     }
 
-    // localStorage.setItem("cv", JSON.stringify(obj));
-    // this.router.navigateByUrl("/resume");
-
     console.log(obj);
   }
   signIn(password) {
     this.http
-      .post(`http://localhost:3000/api/user/${password}`, {
+      .post(`/api/user/${password}`, {
         responseType: "text",
       })
       .subscribe((data) => {
