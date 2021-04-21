@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: "app-form",
@@ -20,7 +21,7 @@ export class FormComponent implements OnInit {
         password: p,
       };
       this.http
-        .post("/api/admin", obj, {
+        .post(`${environment.URL ? environment.URL : ""}/api/admin`, obj, {
           responseType: "text",
         })
         .subscribe((data) => {
@@ -34,7 +35,7 @@ export class FormComponent implements OnInit {
   }
   signIn(password) {
     this.http
-      .post(`/api/user/${password}`, {
+      .post(`${environment.URL ? environment.URL : ""}/api/user/${password}`, {
         responseType: "text",
       })
       .subscribe((data) => {
