@@ -21,7 +21,7 @@ export class FormComponent implements OnInit {
         password: p,
       };
       this.http
-        .post(`${environment.URL ? environment.URL : ""}/api/admin`, obj, {
+        .post(`${environment.URL}/api/admin`, obj, {
           responseType: "text",
         })
         .subscribe((data) => {
@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
   }
   signIn(password) {
     this.http
-      .post(`${environment.URL ? environment.URL : ""}/api/user/${password}`, {
+      .post(`${environment}/api/user/${password}`, {
         responseType: "text",
       })
       .subscribe((data) => {
