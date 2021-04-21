@@ -20,7 +20,7 @@ export class FormComponent implements OnInit {
         password: p,
       };
       this.http
-        .post("http://localhost:3000/api/admin", obj, {
+        .post("/api/admin", obj, {
           responseType: "text",
         })
         .subscribe((data) => {
