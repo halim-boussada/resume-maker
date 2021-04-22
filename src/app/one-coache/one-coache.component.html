@@ -1,21 +1,19 @@
 <app-navbar-user></app-navbar-user>
 
-<h1>one-coache works!</h1>
-<div class="card text-center">
+<h1 style="margin-left: 35%;">one-coache works!</h1>
+<div class="card text-center" style="width: 60%; margin-left: 20%;">
   <div class="card-header">
     {{coache?.username}}
   </div>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
+    <h5 class="card-title">{{coache?.username}}</h5>
     <p class="card-text">
-      With supporting text below as a natural lead-in to additional content.
+      here u can send a request to the coach.
     </p>
     <a *ngIf="!req" (click)="senReq()" class="btn btn-primary">Consult Coach</a>
     <div *ngIf="req">
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label"
-          >Email address</label
-        >
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
         <input
           type="text"
           class="form-control"
@@ -26,7 +24,7 @@
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label"
-          >Example textarea</label
+          >Message</label
         >
         <textarea
           class="form-control"

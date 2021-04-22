@@ -1,10 +1,16 @@
 <app-navbar-user></app-navbar-user>
 
 <h1>motivation-letter works!</h1>
-<button *ngIf="!add" type="button" class="btn btn-success" (click)="addMl()">
+<button
+  *ngIf="!add"
+  type="button"
+  class="btn btn-success"
+  (click)="addMl()"
+  style="margin-left: 40%;"
+>
   + Add ML
 </button>
-<div *ngIf="add">
+<div *ngIf="add" style="width: 60%; margin-left: 20%;">
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label"
       >Email address</label
@@ -38,7 +44,7 @@
   </button>
 </div>
 <div *ngFor="let m of mls">
-  <div class="card" style="width: 18rem;">
+  <div class="card" style="width: 18rem; margin-left: 35%;">
     <div class="card-body">
       <h5 class="card-title">{{m?.header}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
