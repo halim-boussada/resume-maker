@@ -31,11 +31,12 @@ export class FeedbackComponent implements OnInit {
   }
   sendRequest(title, feedback) {
     var obj = {
-      userId: feedback.userId,
-      coachId: feedback.coachId,
+      userId: this.feedback.userId,
+      coachId: this.feedback.coachId,
       title: title,
       feedback: feedback,
     };
+    console.log(obj);
     this.http
       .post(`${environment.URL}/api/feedback`, obj, {
         responseType: "json",
