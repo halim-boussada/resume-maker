@@ -1,14 +1,12 @@
-<app-navbar-user></app-navbar-user>
-
-<h1>one-coache works!</h1>
+<h1>feedback works!</h1>
 <div class="card text-center">
   <div class="card-header">
-    {{coache?.username}}
+    {{feedback?.about}}
   </div>
   <div class="card-body">
     <h5 class="card-title">Special title treatment</h5>
     <p class="card-text">
-      With supporting text below as a natural lead-in to additional content.
+      {{feedback?.data}}.
     </p>
     <a *ngIf="!req" (click)="senReq()" class="btn btn-primary">Consult Coach</a>
     <div *ngIf="req">
@@ -21,7 +19,7 @@
           class="form-control"
           id="exampleFormControlInput1"
           placeholder="about"
-          #about
+          #title
         />
       </div>
       <div class="mb-3">
@@ -32,7 +30,7 @@
           class="form-control"
           id="exampleFormControlTextarea1"
           rows="3"
-          #data
+          #feedback
         ></textarea>
       </div>
       <button type="button" (click)="senReq()" class="btn btn-danger">
@@ -40,8 +38,8 @@
       </button>
       <button
         type="button"
+        (click)="sendRequest(title.value, feedback.value)"
         class="btn btn-success"
-        (click)="sendRequest(about.value, data.value)"
       >
         Send
       </button>

@@ -8,7 +8,6 @@ const FeedbackSchema = new mongoose.Schema(
     coachId: String,
     title: String,
     feedback: String,
-
     type: { type: String, default: "Feedback" },
   },
   {

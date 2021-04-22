@@ -1,3 +1,50 @@
 <app-navbar-user></app-navbar-user>
 
 <h1>motivation-letter works!</h1>
+<button *ngIf="!add" type="button" class="btn btn-success" (click)="addMl()">
+  + Add ML
+</button>
+<div *ngIf="add">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label"
+      >Email address</label
+    >
+    <input
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+      placeholder="header"
+      #header
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label"
+      >Example textarea</label
+    >
+    <textarea
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      #body
+    ></textarea>
+  </div>
+  <button (click)="addMl()" type="button" class="btn btn-danger">X</button>
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="addMotivation(header.value, body.value)"
+  >
+    Success
+  </button>
+</div>
+<div *ngFor="let m of mls">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{m?.header}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text">{{m?.body}}.</p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
+</div>

@@ -111,7 +111,18 @@ app.post("/api/getAllCoaches", function (req, res) {
 });
 app.post("/api/req/:coachId", function (req, res) {
   try {
-    Coaches.find({ coachId: req.params.coachId }, function (error, result) {
+    Coaches.findOne({ _id: req.params.coachId }, function (error, result) {
+      if (error) console.log("this is error ====>", error);
+      res.send(result);
+    });
+  } catch {
+    res.send({ status: false, msg: err });
+  }
+});
+
+app.post("/api/coach/:pw", function (req, res) {
+  try {
+    Coaches.findOne({ password: req.params.pw }, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
     });
@@ -460,7 +471,7 @@ app.post("/api/motivation", (req, res) => {
     };
     const newM = new ML(obj);
     newM.save((err, result) => {
-      res.send("dzadazda");
+      res.send({ body: "ok" });
     });
   } catch {
     res.send({ status: false, msg: err });
@@ -516,7 +527,7 @@ app.post("/api/feedback", (req, res) => {
     };
     const newM = new Feedback(obj);
     newM.save((err, result) => {
-      res.send("dzadazda");
+      res.send({ body: "hhh" });
     });
   } catch {
     res.send({ status: false, msg: err });
@@ -534,6 +545,16 @@ app.post("/api/getFeedback/user/:userId", function (req, res) {
   }
 });
 
+app.post("/api/Req/one/:_id", function (req, res) {
+  try {
+    Request.findOne({ _id: req.params._id }, function (error, result) {
+      if (error) console.log("this is error ====>", error);
+      res.send(result);
+    });
+  } catch {
+    res.send({ status: false, msg: err });
+  }
+});
 app.post("/api/getFeedback/coach/:coachId", function (req, res) {
   try {
     Feedback.find({ coachId: req.params.coachId }, function (error, result) {

@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
   }
   signIn(password) {
     this.http
-      .post(`${environment}/api/user/${password}`, {
+      .post(`${environment.URL}/api/user/${password}`, {
         responseType: "text",
       })
       .subscribe((data) => {

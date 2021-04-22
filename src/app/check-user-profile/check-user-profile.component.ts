@@ -5,11 +5,11 @@ import html2canvas from "html2canvas";
 import { environment } from "../../environments/environment";
 
 @Component({
-  selector: "app-resume",
-  templateUrl: "./resume.component.html",
-  styleUrls: ["./resume.component.css"],
+  selector: "app-check-user-profile",
+  templateUrl: "./check-user-profile.component.html",
+  styleUrls: ["./check-user-profile.component.css"],
 })
-export class ResumeComponent implements OnInit {
+export class CheckUserProfileComponent implements OnInit {
   constructor(private http: HttpClient) {}
   user: any;
   soft: any;
@@ -20,7 +20,7 @@ export class ResumeComponent implements OnInit {
   addtech: any = false;
   addexperience: any = false;
   addeducation: any = false;
-  id: any = localStorage.getItem("id");
+  id: any = localStorage.getItem("checkUser");
   ngOnInit(): void {
     this.http
       .post(`${environment.URL}/api/soft/${this.id}`, {

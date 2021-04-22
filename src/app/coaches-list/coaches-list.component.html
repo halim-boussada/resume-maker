@@ -1,3 +1,18 @@
 <app-navbar-user></app-navbar-user>
-
 <h1>coaches-list works!</h1>
+
+<div class="card" style="width: 18rem;" *ngFor="let c of coaches">
+  <img
+    src="https://www.dynamique-mag.com/wp-content/uploads/ef380d36048b77d135e3236401aac6e8.jpg"
+    class="card-img-top"
+    alt="..."
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ c?.username}}</h5>
+    <p class="card-text">
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </p>
+    <a (click)="goToOneCoatch(c._id)" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>

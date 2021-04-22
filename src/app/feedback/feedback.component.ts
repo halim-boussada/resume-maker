@@ -1,45 +1,43 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-
 import { environment } from "../../environments/environment";
-@Component({
-  selector: "app-one-coache",
-  templateUrl: "./one-coache.component.html",
-  styleUrls: ["./one-coache.component.css"],
-})
-export class OneCoacheComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router) {}
-  coache: any;
-  req: any = false;
-  ngOnInit(): void {
-    var c = localStorage.getItem("coachId");
 
+@Component({
+  selector: "app-feedback",
+  templateUrl: "./feedback.component.html",
+  styleUrls: ["./feedback.component.css"],
+})
+export class FeedbackComponent implements OnInit {
+  constructor(private http: HttpClient, private router: Router) {}
+  id: any = localStorage.getItem("onefeedback");
+  feedback: any;
+  req: any = false;
+
+  ngOnInit(): void {
+    console.log(this.id);
     this.http
-      .post(`${environment.URL}/api/req/${c}`, {
+      .post(`${environment.URL}/api/Req/one/${this.id}`, {
         responseType: "json",
       })
       .subscribe((data) => {
-        console.log(data);
-        this.coache = data;
+        this.feedback = data;
+        console.log("data", data);
       });
   }
   senReq() {
     var r = !this.req;
     this.req = r;
   }
-  sendRequest(about, data) {
-    var id = localStorage.getItem("id");
+  sendRequest(title, feedback) {
     var obj = {
-      userId: id,
-      coachId: this.coache._id,
-      userName: "deffult",
-      email: "deffult",
-      about: about,
-      data: data,
+      userId: feedback.userId,
+      coachId: feedback.coachId,
+      title: title,
+      feedback: feedback,
     };
     this.http
-      .post(`${environment.URL}/api/sendRequest`, obj, {
+      .post(`${environment.URL}/api/feedback`, obj, {
         responseType: "json",
       })
       .subscribe((data) => {
