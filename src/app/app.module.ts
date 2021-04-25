@@ -20,9 +20,11 @@ import { CoacheHomeComponent } from './coache-home/coache-home.component';
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { CheckUserProfileComponent } from './check-user-profile/check-user-profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { OneMlComponent } from './one-ml/one-ml.component';
+import { RequestArchieveComponent } from './request-archieve/request-archieve.component';
 
 @NgModule({
-  declarations: [AppComponent, ResumeComponent, CoachesListComponent, OneCoacheComponent, MotivationLetterComponent, NotificationComponent, NavbarUserComponent, AdminComponent, AddCoachComponent, ManegeUsersComponent, ManegeCoachesComponent, NavbarAdminComponent, CoacheHomeComponent, RequestsListComponent, CheckUserProfileComponent, FeedbackComponent],
+  declarations: [AppComponent, ResumeComponent, CoachesListComponent, OneCoacheComponent, MotivationLetterComponent, NotificationComponent, NavbarUserComponent, AdminComponent, AddCoachComponent, ManegeUsersComponent, ManegeCoachesComponent, NavbarAdminComponent, CoacheHomeComponent, RequestsListComponent, CheckUserProfileComponent, FeedbackComponent, OneMlComponent, RequestArchieveComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
 
   providers: [],

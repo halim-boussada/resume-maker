@@ -22,6 +22,9 @@ export class NavbarUserComponent implements OnInit {
   notif() {
     this.router.navigateByUrl("/notifications");
   }
+  archive() {
+    this.router.navigateByUrl("/requestArchieve");
+  }
   open() {
     const navLinks = document.querySelector(".nav-links");
     const links = document.querySelectorAll(".nav-links li");

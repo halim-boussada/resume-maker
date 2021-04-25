@@ -1,1 +1,20 @@
-<p>manege-coaches works!</p>
+<app-navbar-admin></app-navbar-admin>
+
+<div
+  class="card"
+  style="width: 18rem; margin-left: 30%;"
+  *ngFor="let c of coaches"
+>
+  <img
+    src="https://www.dynamique-mag.com/wp-content/uploads/ef380d36048b77d135e3236401aac6e8.jpg"
+    class="card-img-top"
+    alt="..."
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ c?.username}}</h5>
+    <p class="card-text">
+      this is a coach provided by admin.
+    </p>
+    <a (click)="banOneCoach(c._id)" class="btn btn-primary">Ban</a>
+  </div>
+</div>

@@ -1,1 +1,18 @@
-<p>admin works!</p>
+<form class="form">
+  <div class="segment">
+    <h1>Sign up</h1>
+  </div>
+  <label>
+    <input type="text" placeholder="Username" name="admin" #admin />
+  </label>
+  <label>
+    <input type="password" placeholder="Password" #password name="password" />
+  </label>
+  <button
+    class="red"
+    type="button"
+    (click)="login(admin.value, password.value)"
+  >
+    <i class="icon ion-md-lock"></i> Log in
+  </button>
+</form>

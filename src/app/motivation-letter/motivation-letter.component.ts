@@ -44,4 +44,18 @@ export class MotivationLetterComponent implements OnInit {
         this.ngOnInit();
       });
   }
+  oneMl(id) {
+    localStorage.setItem("oneMl", id);
+    this.router.navigateByUrl("/oneMl");
+  }
+  delete(id) {
+    this.http
+      .delete(`${environment.URL}/api/motivation/${id}`, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        alert("deleted");
+        this.ngOnInit();
+      });
+  }
 }

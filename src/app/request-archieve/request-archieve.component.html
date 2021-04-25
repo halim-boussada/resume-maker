@@ -1,0 +1,11 @@
+<app-navbar-user></app-navbar-user>
+<p>request-archieve works!</p>
+<div class="card" style="width: 18rem;" *ngFor="let l of list">
+  <div class="card-body">
+    <h5 class="card-title">{{l?.about}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">{{l?.data}}.</p>
+    <a (click)="gotoprofileUser(l.userId)" class="card-link">Profile</a>
+    <a (click)="goFeedback(l._id)" class="card-link">Another link</a>
+  </div>
+</div>

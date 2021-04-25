@@ -241,7 +241,6 @@ app.post("/api/tech", (req, res) => {
 app.post("/api/ex", (req, res) => {
   try {
     var obj = {
-      name: req.body.name,
       userId: req.body.userId,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
@@ -263,7 +262,7 @@ app.post("/api/ex", (req, res) => {
 /// GET DATA OF USER ///////
 app.post("/api/experience/:userId", function (req, res) {
   try {
-    Experience.findOne({ userId: req.params.userId }, function (error, result) {
+    Experience.find({ userId: req.params.userId }, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
     });
@@ -481,6 +480,17 @@ app.post("/api/motivation", (req, res) => {
 app.post("/api/motivation/:userId", function (req, res) {
   try {
     ML.find({ userId: req.params.userId }, function (error, result) {
+      if (error) console.log("this is error ====>", error);
+      res.send(result);
+    });
+  } catch {
+    res.send({ status: false, msg: err });
+  }
+});
+
+app.post("/api/oneMotivation/:_id", function (req, res) {
+  try {
+    ML.findOne({ _id: req.params._id }, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
     });

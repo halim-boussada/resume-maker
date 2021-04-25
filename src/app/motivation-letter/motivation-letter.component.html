@@ -49,8 +49,10 @@
       <h5 class="card-title">{{m?.header}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
       <p class="card-text">{{m?.body}}.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+      <a (click)="oneMl(m._id)" class="card-link">Discover</a>
+      <button type="button" (click)="delete(m?._id)" class="btn btn-danger">
+        Danger
+      </button>
     </div>
   </div>
 </div>

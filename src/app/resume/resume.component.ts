@@ -16,8 +16,10 @@ export class ResumeComponent implements OnInit {
   tech: any;
   experience: any;
   education: any;
+  language: any;
   addsoft: any = false;
   addtech: any = false;
+  addlanguage: any = false;
   addexperience: any = false;
   addeducation: any = false;
   id: any = localStorage.getItem("id");
@@ -36,7 +38,83 @@ export class ResumeComponent implements OnInit {
       .subscribe((data) => {
         this.tech = data;
       });
+    this.http
+      .post(`${environment.URL}/api/language/${this.id}`, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.language = data;
+      });
+    this.http
+      .post(`${environment.URL}/api/experience/${this.id}`, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.experience = data;
+        console.log(this.experience);
+      });
+    this.http
+      .post(`${environment.URL}/api/education/${this.id}`, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.education = data;
+      });
   }
+
+  /////////// SOFT experience //////////////////
+  addexp() {
+    this.addexperience = true;
+  }
+  cancelexp() {
+    this.addexperience = false;
+  }
+  saveexp(startDate, endDate, company, post, discription) {
+    var obj = {
+      userId: this.id,
+      startDate,
+      endDate,
+      company,
+      post,
+      discription,
+    };
+    this.http
+      .post(`${environment.URL}/api/ex`, obj, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.ngOnInit();
+        this.addexp();
+      });
+  }
+  ////////////// END experice //////////
+
+  /////////// SOFT education //////////////////
+  addEducation() {
+    this.addeducation = true;
+  }
+  canceleducation() {
+    this.addeducation = false;
+  }
+  saveeducation(startDate, endDate, university, diploma, discription) {
+    var obj = {
+      userId: this.id,
+      startDate,
+      endDate,
+      university,
+      diploma,
+      discription,
+    };
+    this.http
+      .post(`${environment.URL}/api/education`, obj, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.ngOnInit();
+        this.canceleducation();
+      });
+  }
+  ////////////// END experice //////////
 
   /////////// SOFT SKILLS //////////////////
   addSoft() {
@@ -84,6 +162,30 @@ export class ResumeComponent implements OnInit {
       });
   }
   ////////////// END tech //////////
+
+  /////////// SOFT language //////////////////
+  addLanguage() {
+    this.addlanguage = true;
+  }
+  cancellanguage() {
+    this.addlanguage = false;
+  }
+  savelanguage(skill) {
+    var obj = {
+      userId: this.id,
+      language: skill,
+    };
+    console.log(obj);
+    this.http
+      .post(`${environment.URL}/api/language`, obj, {
+        responseType: "json",
+      })
+      .subscribe((data) => {
+        this.ngOnInit();
+        this.cancellanguage();
+      });
+  }
+  ////////////// END language //////////
   captureScreen() {
     const data = document.getElementById("contentToConvert");
     html2canvas(data).then((canvas) => {

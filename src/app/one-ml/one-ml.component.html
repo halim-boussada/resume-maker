@@ -1,0 +1,20 @@
+<app-navbar-user></app-navbar-user>
+<div *ngIf="!up">
+  <p><b>{{ ml?.header }}</b> {{ ml?.body }}</p>
+</div>
+<div *ngIf="up">
+  <input type="text" value="{{ ml?.header }}" #header />
+  <textarea type="text" value="{{ ml?.body }}" #body></textarea>
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="update(header.value, body.value)"
+  >
+    update
+  </button>
+  <button type="button" (click)="open()" class="btn btn-danger">cancel</button>
+</div>
+
+<button type="button" (click)="open()" *ngIf="!up" class="btn btn-warning">
+  update
+</button>
