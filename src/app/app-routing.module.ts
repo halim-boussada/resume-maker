@@ -1,10 +1,12 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AddCoachComponent } from "./add-coach/add-coach.component";
+import { AddUserDataComponent } from "./add-user-data/add-user-data.component";
 import { AdminComponent } from "./admin/admin.component";
 import { CheckUserProfileComponent } from "./check-user-profile/check-user-profile.component";
 import { CoacheHomeComponent } from "./coache-home/coache-home.component";
 import { CoachesListComponent } from "./coaches-list/coaches-list.component";
+import { DownloadResumeComponent } from "./download-resume/download-resume.component";
 import { FeedbackComponent } from "./feedback/feedback.component";
 import { FormComponent } from "./form/form.component";
 import { HomeComponent } from "./home/home.component";
@@ -36,6 +38,8 @@ const routes: Routes = [
   { path: "manegeUsers", component: ManegeUsersComponent },
   { path: "oneMl", component: OneMlComponent },
   { path: "requestArchieve", component: RequestArchieveComponent },
+  { path: "addData", component: AddUserDataComponent },
+  { path: "dResume", component: DownloadResumeComponent },
 ];
 
 @NgModule({

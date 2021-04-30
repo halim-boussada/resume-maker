@@ -3,15 +3,14 @@ import { HttpClient } from "@angular/common/http";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { environment } from "../../environments/environment";
-import { Router } from "@angular/router";
 
 @Component({
-  selector: "app-resume",
-  templateUrl: "./resume.component.html",
-  styleUrls: ["./resume.component.css"],
+  selector: "app-download-resume",
+  templateUrl: "./download-resume.component.html",
+  styleUrls: ["./download-resume.component.css"],
 })
-export class ResumeComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router) {}
+export class DownloadResumeComponent implements OnInit {
+  constructor(private http: HttpClient) {}
   user: any;
   soft: any;
   tech: any;
@@ -69,9 +68,6 @@ export class ResumeComponent implements OnInit {
       .subscribe((data) => {
         this.education = data;
       });
-  }
-  goto(to) {
-    this.router.navigateByUrl(to);
   }
   active() {
     this.delete = true;

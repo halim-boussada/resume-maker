@@ -21,6 +21,8 @@ const Tech = require("./database/technicalSkills.js");
 const Feedback = require("./database/feedback.js");
 const Language = require("./database/language.js");
 const ML = require("./database/MotivationLetter.js");
+const Number = require("./database/number.js");
+
 app.use(cors());
 
 const upload = multer({ dest: "uploads" });
@@ -75,6 +77,36 @@ app.post("/api/user/:pw", function (req, res) {
     Admin.findOne({ password: req.params.pw }, function (error, result) {
       if (error) console.log("this is error ====>", error);
       res.send(result);
+    });
+  } catch {
+    res.send({ status: false, msg: err });
+  }
+});
+
+app.post("/api/getuser/:_id", function (req, res) {
+  try {
+    Admin.findOne({ _id: req.params._id }, function (error, result) {
+      if (error) console.log("this is error ====>", error);
+      res.send(result);
+    });
+  } catch {
+    res.send({ status: false, msg: err });
+  }
+});
+
+app.put("/api/user/:_id", function (req, res) {
+  try {
+    var obj = {
+      name: req.body.name,
+      imageUrl: req.body.imageUrl,
+      email: req.body.email,
+      about: req.body.about,
+      contact: req.body.contact,
+      linkedin: req.body.linkedin,
+    };
+    Admin.updateOne({ _id: req.params._id }, obj, function (error, result) {
+      if (error) console.log("this is error ====>", error);
+      res.send({ result: "done" });
     });
   } catch {
     res.send({ status: false, msg: err });
@@ -537,13 +569,64 @@ app.post("/api/feedback", (req, res) => {
     };
     const newM = new Feedback(obj);
     newM.save((err, result) => {
-      res.send({ body: "hhh" });
+      Number.findOne({ userId: req.body.userId }, function (error, result) {
+        if (error) console.log("this is error ====>", error);
+        if (result) {
+          var r = result.number + 1;
+          var up = {
+            userId: req.body.userId,
+            number: r,
+          };
+          Number.updateOne({ userId: req.body.userId }, up, function (
+            error,
+            result
+          ) {
+            if (error) console.log("this is error ====>", error);
+            res.send({ result: "done" });
+          });
+        } else {
+          var non = {
+            userId: req.body.userId,
+            number: 1,
+          };
+          const newM = new Number(obj);
+          newM.save((err, result) => {
+            res.send({ body: "ok" });
+          });
+        }
+      });
     });
   } catch {
     res.send({ status: false, msg: err });
   }
 });
 
+app.put("/api/rezero/:userId", function (req, res) {
+  try {
+    var obj = {
+      number: 0,
+    };
+    Number.updateOne({ userId: req.params.userId }, obj, function (
+      error,
+      result
+    ) {
+      if (error) console.log("this is error ====>", error);
+      res.send({ result: "done" });
+    });
+  } catch {
+    res.send({ status: false, msg: err });
+  }
+});
+app.post("/api/number/user/:userId", function (req, res) {
+  try {
+    Number.findOne({ userId: req.params.userId }, function (error, result) {
+      if (error) console.log("this is error ====>", error);
+      res.send(result);
+    });
+  } catch {
+    res.send({ status: false, msg: err });
+  }
+});
 app.post("/api/getFeedback/user/:userId", function (req, res) {
   try {
     Feedback.find({ userId: req.params.userId }, function (error, result) {

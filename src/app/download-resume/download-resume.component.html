@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <title>W3.CSS Template</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <style>
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Roboto", sans-serif;
+    }
+  </style>
+  <app-navbar-user></app-navbar-user>
+  <body class="w3-light-grey">
+    <button
+      mat-raised-button
+      color="primary"
+      value="Generate PDF"
+      (click)="captureScreen()"
+    >
+      Generate PDF
+    </button>
+
+    <!-- Page Container -->
+    <div
+      class="w3-content w3-margin-top"
+      id="contentToConvert"
+      style="max-width: 1400px;"
+    >
+      <!-- The Grid -->
+      <div class="w3-row-padding">
+        <!-- Left Column -->
+        <div class="w3-third">
+          <div class="w3-white w3-text-grey w3-card-4">
+            <div class="w3-display-container">
+              <img
+                src="{{user?.imageUrl}}"
+                style="width: 100%; border-radius: 50%;"
+                alt="Avatar"
+              />
+              <div class="w3-display-bottomleft w3-container w3-text-black">
+                <h2>{{user?.name}}</h2>
+              </div>
+            </div>
+            <div class="w3-container">
+              <p>
+                <i
+                  class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"
+                ></i
+                >{{user?.linkedin}}
+              </p>
+              <p>
+                <i
+                  class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"
+                ></i
+                >London, UK
+              </p>
+              <p>
+                <i
+                  class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"
+                ></i
+                >{{user?.email}}
+              </p>
+              <p>
+                <i
+                  class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"
+                ></i
+                >{{user?.contact}}
+              </p>
+              <hr />
+
+              <p class="w3-large">
+                <b
+                  ><i
+                    class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"
+                  ></i
+                  >Skills</b
+                >
+              </p>
+              <div *ngFor="let e of soft">
+                <p>{{ e?.skill }}</p>
+              </div>
+
+              <p class="w3-large">
+                <b
+                  ><i
+                    class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"
+                  ></i
+                  >languages</b
+                >
+              </p>
+              <div *ngFor="let e of language">
+                <p>{{ e?.language }}</p>
+              </div>
+
+              <p class="w3-large w3-text-theme">
+                <b
+                  ><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i
+                  >Languages</b
+                >
+              </p>
+              <div *ngFor="let e of tech">
+                <p>{{ e?.skill }}</p>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <!-- End Left Column -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="w3-twothird">
+          <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <h2 class="w3-text-grey w3-padding-16">
+              About
+            </h2>
+            <div class="w3-container">
+              <p>
+                {{user?.about}}
+              </p>
+              <hr />
+            </div>
+          </div>
+
+          <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <h2 class="w3-text-grey w3-padding-16">
+              <i
+                class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"
+              ></i
+              >Work Experience
+            </h2>
+            <div class="w3-container" *ngFor="let e of experience">
+              <h5 class="w3-opacity">
+                <b>{{e?.company}}</b>
+              </h5>
+              <h6 class="w3-text-teal">
+                <i class="fa fa-calendar fa-fw w3-margin-right"></i
+                >{{e?.startDate}} - {{e?.endDate}}
+                <span class="w3-tag w3-teal w3-round">{{e?.post}}</span>
+              </h6>
+              <p>
+                {{e?.discription}}
+              </p>
+              <hr />
+            </div>
+          </div>
+
+          <div class="w3-container w3-card w3-white">
+            <h2 class="w3-text-grey w3-padding-16">
+              <i
+                class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"
+              ></i
+              >Education
+            </h2>
+            <div
+              class="w3-container"
+              *ngFor="let e of education"
+              (mouseover)="active()"
+            >
+              <h5 class="w3-opacity"><b>{{e?.university}}</b></h5>
+              <h6 class="w3-text-teal">
+                <i class="fa fa-calendar fa-fw w3-margin-right"></i
+                >{{e?.startDate}} - {{e?.endDate}}
+                <span class="w3-tag w3-teal w3-round">{{e?.diploma}}</span>
+              </h6>
+              <p>{{e?.discription}}</p>
+              <hr />
+            </div>
+          </div>
+
+          <div class="row g-3" *ngIf="addeducation">
+            <div class="col-md-6">
+              <label for="inputCity" class="form-label">discription</label>
+              <textarea
+                #discriptione
+                type="text"
+                class="form-control"
+                id="inputCity"
+              ></textarea>
+            </div>
+
+            <div class="col-12"></div>
+          </div>
+
+          <!-- End Right Column -->
+        </div>
+
+        <!-- End Grid -->
+      </div>
+
+      <!-- End Page Container -->
+    </div>
+  </body>
+</html>

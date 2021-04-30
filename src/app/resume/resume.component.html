@@ -25,14 +25,13 @@
     }
   </style>
   <app-navbar-user></app-navbar-user>
+
   <body class="w3-light-grey">
-    <button
-      mat-raised-button
-      color="primary"
-      value="Generate PDF"
-      (click)="captureScreen()"
-    >
-      Generate PDF
+    <button type="button" class="btn btn-primary" (click)="goto('/dResume')">
+      Download resume
+    </button>
+    <button type="button" class="btn btn-light" (click)="goto('/addData')">
+      add data
     </button>
 
     <!-- Page Container -->
@@ -48,12 +47,12 @@
           <div class="w3-white w3-text-grey w3-card-4">
             <div class="w3-display-container">
               <img
-                src="https://image.flaticon.com/icons/png/512/194/194938.png"
-                style="width: 100%;"
+                src="{{user?.imageUrl}}"
+                style="width: 100%; border-radius: 50%;"
                 alt="Avatar"
               />
               <div class="w3-display-bottomleft w3-container w3-text-black">
-                <h2>HALIM</h2>
+                <h2>{{user?.name}}</h2>
               </div>
             </div>
             <div class="w3-container">
@@ -61,7 +60,7 @@
                 <i
                   class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"
                 ></i
-                >Designer
+                >{{user?.linkedin}}
               </p>
               <p>
                 <i
@@ -73,13 +72,13 @@
                 <i
                   class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"
                 ></i
-                >ex@mail.com
+                >{{user?.email}}
               </p>
               <p>
                 <i
                   class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"
                 ></i
-                >1224435534
+                >{{user?.contact}}
               </p>
               <hr />
 
@@ -91,7 +90,12 @@
                   >Skills</b
                 >
               </p>
-              <div *ngFor="let e of soft"><p>{{ e?.skill }}</p></div>
+              <div *ngFor="let e of soft">
+                <p>{{ e?.skill }}</p>
+                <button class="btn" (click)="deletesoft(e._id)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
 
               <div *ngIf="addsoft">
                 <input type="text" #skill />
@@ -125,7 +129,12 @@
                   >languages</b
                 >
               </p>
-              <div *ngFor="let e of language"><p>{{ e?.language }}</p></div>
+              <div *ngFor="let e of language">
+                <p>{{ e?.language }}</p>
+                <button class="btn" (click)="deletelanguage(e._id)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
 
               <div *ngIf="addlanguage">
                 <input type="text" #language />
@@ -157,7 +166,12 @@
                   >Languages</b
                 >
               </p>
-              <div *ngFor="let e of tech"><p>{{ e?.skill }}</p></div>
+              <div *ngFor="let e of tech">
+                <p>{{ e?.skill }}</p>
+                <button class="btn" (click)="deletetech(e._id)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
 
               <div *ngIf="addtech">
                 <input type="text" #skillt />
@@ -180,6 +194,7 @@
                 style="width: 10%; height: 10%; cursor: pointer;"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAeFBMVEUty3D///+y6MUZyWglym1q1pIgyWrs+vL4/frz/Pfw+/XR8t4zzHTl+Oxx3J73/frF79Q7znlT04e46cnd9eWq6cSV4rOG3qnM8t1a1Y1s1pRz2Jp626DZ9uWh5705zXdg2JJH0YKM3qsAx2B33aKi57++7tGa5LiLrSgWAAAInElEQVR4nO2debuiLBiH4YBkauVuTYvaYt//G75UZ6YyTVEWxff358zVkftieRbgAUCxMk1zHrrRNTlnfu55DgDA8bzcz85JHBXhnP6/4BYAYX95NVuE7nW5SdEJEUIwBq/CmP4bQijdLK9uuJithLVDDKEVroOjkSNUBvsURUXIM+JgHVpC2sKf0KSDMtk4FK6B7Y2TIGeTRG7If8zyJrSjxPAwE92TEntGEtmcW8SVMDxsfacT3ZPS8beHPc9G8SOcXwzPaZx2LSAx8LLLnFu7eBHayxarSntKgpa8RisPwtUiyhHhRfcrgvJowcOG9Ce07NhD3HrvRRh5sd3fgvQlnLlJigTgPYTSxJ0pJbSCXcp7eL6LpLugXz/2Igy2nojh+S7sbQNFhGsjFc93Z0yNtQLC2bmXaWdkJOfO07EjoXVxxM6/sohz6TgdOxGuio1cvjvjpuhkHrsQ7o9A3gB9CoNjF4eVnXD148vvwIeI/8PurzIT7hNHRQc+hJ2EuRtZCQNfHd+d0Wc1jmyEczUz8A0RJGwjlYlwn4tzQdsL5UwjlYHQLPgFgL2EccGQzmlPOLuqWkI/Ra7tXZzWhOFONdabdiFvQjtTzVRS1jbL0ZLQzYcxBZ/CucuTsFBo5euEnYIf4eGkGqdSpwMnQvM6BCtYJXRtYTWaCa14eCP0n+LmoLGR0Iod1Rhf5DQjNhEOG5AuN42IDYRmPMBV9FUUsWEuNhBeB+KK1gvjax/Cy1BX0VehS3fCYph2sKzT16D4G6E76EXmRc43B+4LoT04X7ROOP/ihtcThtlYACliVh9M1RLOhhUPNmlXGxLXEZoH1W1m1KHOLNYRuuMZog/hutWmhjBU3eAOqpmK1YTz0SyjT+G8Oo9aTXgcgy9TFjq2JwxUN7ajKn2bKsK94r2JrsJ+VTK8gnCejBOQIlZtaVQQ/ozFHa3QTxtCe6Rj9CbsfzqoH4Tz43C2J9hFjh/j9IOwUN3InvpIE5cJrc14x+hNeFPOTJUJD2MeozeRciK8RDgb8Tr6K2f2lfA89i6knXj+RrgWCIjfJe5DZP2FUGDiAvt/jKf+CDS6OKsnDFJhnwXo3S0OBEYvaVBHaG0Fjh307lD9CCTEW6uGMPDEfVUmIfCCasLZTqSxl0mIXzNvL4SuwFkolxCkbhWhlQi1hVIJSWJVENpCu1AuIXDsT8JVLPabcglRvPogXIhcSIFsQuAtPggjwZ+UTIiiD0LROWDJhDgvE9qic8CSCQGyS4RL0WGTbEKyfCecC0/jyyYEaP5GeBEe+UonJJc3QvE72tIJsfFKuBdsDIEKQi98IZSwpS2dEDiHF0KRoe+v5BPi7ZNQxlaFAsLHJsadMJKQJZVPCJzoH+FRQiZfASE+/iUMDU0JjcUvoSveVighBJ77SxjJ2G5SQYijB6HgBM2vVBDe0zWUMJSyZaikDzfhnXAtZUdNBSFw1ndCkVsITykhvG2WALiKpewZKiG8HVwAcCbDGioixMaMEopOI/5KCeEtqQhgKOdbaghRSAldrQldSijpirYaQhJDYC7lHBFSQ4iXJjAlHdRTROhTQklnhNQQAscElqRPKSJEFthrTrgHheaEBYgknWRTREgiIMfvVkcYA1kH8xUR4gT0MPgYMehUIjyx/LhHG5eg+64T9oMfBr1fvApZftqj/BbOgN/1twD/gbL0p3sn+iDvTmhII+wRpOege/w7DkIPdD/rNQ7CFHR3vMdB2CewGAdhH/1POBRC/eeh/mup/vZQf59Gf79U/9hC//hQ/xhf/zyN/rk2/fOl+ue89d+30H/vaQL7h9rvAUNJBlHdPj6UZC4UnsUIde7D+3ka/c9E6X+uTeuzifHtbKKkpUbN+dLifoJW8DX1vx9TckbYfpzzllJsVsk57yycyFl9/e9bTODOzEL7e0/6312bwP1D/e+Q6n8PeAJ3ufW/j69/TYUJ1MXQv7aJ/vVpJlBjSP86UROo9aV/vTb9a+5BW2yAob5u4gRqX+pfv3QCNWj1ryM8gVrQ+tfznkBN9gnU1df/bYQJvG+h/xslE3hnRv+3gibw3pP+b3ZRh0p1O3uo1btrY347b9fu7Tz93z+cwBuWE3iHdAJvycK96vZ2UNUkrCeExdg6EX84Mw2E5kV1kxl1YX2XW/+31WUdWeSj+yFEZkJoj2ZBxfmnO9qGELpjCfidupfjmwhhcFLd9lY6VfoyrQjhYQy+DSrnLVgI4VVk2o+LML5+R2ggNGNn2IjYiesMYTtCaMWDXm4oYDnzxEp4QxxwLzYDNhNSRNUY9cLNgC0IoXkd6oqKrg1zsCUhNRrDtIun72aChRAWA5yL2KmLl7oQQndwPirOv7lq7ITQzlQjlZR9cbY7EcJQ6EkNZu3qw6WuhHAmqXh7G5FrbcDbgxCaxUCcVIyLFlaiAyGE+3wIlhHlNVk1DoRwngDV3YhBUp0X5UNIg2LFexrY/xruciCE+51C64+dHdMI7UQI5z++qkWV+D9sI7QbIe3Go5LZiMGRuQM7EsJVsZHfjWRTrJqbxomQBo0XRy4jAZfmUJAnIXVxzkTeUMXk3N6J4UUI4dpI5TDiNFs3N0cAITWOW088I/a2rCaQHyG0gl0qdj6SdBd0nIBcCOl0dJNUnLOK0sTtPAE5EdJ+tGOvR/nNemHkxXa//uNDSM3jIsoR78FKUB4tOhnAkngQ3mQvEeEXPmKClm2zFE3iRUj91YvhORwg6Z/wsgu7/1knfoRU4WHrO70cAUwcf3vo4n7WiishlR0lmYc7UdJfeVkS8Rqdf8WbEEIzdCllipgo6cRzKJ0bMiRgWoo/4U1WaBexkaMWqw+mcCg34sIO+1uGKokhvGk+W4RFvNykiIKSMioFIxQNpZtlXISLGb+VpSxxhA+ZpjkPiyhOzpmfe7fLcY7n5bmfnZM4KsI5/X/BLfgP8CuQfLqCn90AAAAASUVORK5CYII="
               />
+
               <br />
             </div>
           </div>
@@ -192,12 +207,27 @@
         <div class="w3-twothird">
           <div class="w3-container w3-card w3-white w3-margin-bottom">
             <h2 class="w3-text-grey w3-padding-16">
+              About
+            </h2>
+            <div class="w3-container">
+              <p>
+                {{user?.about}}
+              </p>
+              <hr />
+            </div>
+          </div>
+
+          <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <h2 class="w3-text-grey w3-padding-16">
               <i
                 class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"
               ></i
               >Work Experience
             </h2>
             <div class="w3-container" *ngFor="let e of experience">
+              <button class="btn" (click)="deleteexperience(e._id)">
+                <i class="fa fa-trash"></i>
+              </button>
               <h5 class="w3-opacity">
                 <b>{{e?.company}}</b>
               </h5>
@@ -279,7 +309,14 @@
               ></i
               >Education
             </h2>
-            <div class="w3-container" *ngFor="let e of education">
+            <div
+              class="w3-container"
+              *ngFor="let e of education"
+              (mouseover)="active()"
+            >
+              <button class="btn" (click)="deleteeducation(e._id)">
+                <i class="fa fa-trash"></i>
+              </button>
               <h5 class="w3-opacity"><b>{{e?.university}}</b></h5>
               <h6 class="w3-text-teal">
                 <i class="fa fa-calendar fa-fw w3-margin-right"></i
@@ -294,6 +331,9 @@
               style="width: 4%; height: 4%; cursor: pointer;"
               src="data:image/png;base64,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"
             />
+            <button *ngIf="delete" class="btn btn-primary">
+              delete
+            </button>
           </div>
 
           <div class="row g-3" *ngIf="addeducation">
